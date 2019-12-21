@@ -33,6 +33,8 @@ if (module.hot) {
       .then(response => {
       // Do something with resp.data.animals
         console.log(response.data.animals)
+        showAnimals(response.data.animals)
+       
       })
       .catch(function (error) {
           // Handle the error
@@ -55,10 +57,33 @@ if (module.hot) {
 
   }
 
-  //JSONP Callback
+function showAnimals(pets) {
+  const results = document.querySelector('#results');
+  
+  //Clear First 
+  results.innerHTML = "";
 
-  function callback(data) {
-    console.log(data);
-  }
+  //Loop Through Pets 
+  pets.forEach(pet => {
+    if(pet.photos.length){
+       results.innerHTML += `
+       <div class="row">
+      <div class="col-sm-6">
+        <h4 class="mb4">${pet.name.toUpperCase()}</h4>
+        <img class="img-fluid" src=${pet.photos[0]["medium"]}></img>
+      </div>
+    </div>`
+    }
+    console.log(pet)
+    // results.innerHTML = `
+    // <div class="row">
+    //   <div class="col-sm-6">
+    //     <h4>${pet.}</h4>
+    //   </div>
+    // </div>
 
+    // <img src=${pet.photos[0]["medium"]}></img>
+    // `
+  })
+}
 
