@@ -29,10 +29,14 @@ if (module.hot) {
     //Fetch Pets
     const client = new Client({apiKey: apiKey, secret: apiSecret});
 
-    client.animal.search({type: animal})
+    client.animal.search({
+      type: animal,
+      limit: 100,
+      location: zip
+
+    })
       .then(response => {
       // Do something with resp.data.animals
-        console.log(response.data.animals)
         showAnimals(response.data.animals)
        
       })
@@ -66,19 +70,30 @@ function showAnimals(pets) {
   //Loop Through Pets 
   pets.forEach(pet => {
     if(pet.photos.length){
-       results.innerHTML += `
+      
+      console.log(pet)
+      results.innerHTML += `
        <div class="row">
       <div class="col-sm-6">
-        <h4 class="mb4">${pet.name.toUpperCase()}</h4>
-        <img class="img-fluid" src=${pet.photos[0]["medium"]}></img>
+        <h4 class="mb4">${pet.name.toUpperCase()} (${pet.age})</h4>
+        <p class="text-secondary">${pet.breeds.primary}</p>
+        <p>
+        ${pet.contact.address.address1}
+        ${pet.contact.address.city},
+        ${pet.contact.address.state}
+        </p>
+      </div>
+      <div class="col-sm-6 text-center">
+        <img src=${pet.photos[0]["medium"]}>
       </div>
     </div>`
     }
-    console.log(pet)
+    
     // results.innerHTML = `
     // <div class="row">
     //   <div class="col-sm-6">
     //     <h4>${pet.}</h4>
+    // <img class="img-fluid" src=${pet.photos[0]["medium"]}></img>
     //   </div>
     // </div>
 
