@@ -1,4 +1,4 @@
-import fetchJsonp from 'fetch-jsonp';
+// import fetchJsonp from 'fetch-jsonp';
 import { Client } from "@petfinder/petfinder-js";
 
 
@@ -36,11 +36,11 @@ if (module.hot) {
 
     })
       .then(response => {
-      // Do something with resp.data.animals
+      // Do something with response.data.animals
         showAnimals(response.data.animals)
        
       })
-      .catch(function (error) {
+      .catch (error => {
           // Handle the error
           console.log(error)
       });
